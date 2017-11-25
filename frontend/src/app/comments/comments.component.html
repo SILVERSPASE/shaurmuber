@@ -1,0 +1,37 @@
+<div *ngIf="comments">
+<div *ngFor="let comment of comments | paginate: { itemsPerPage: 10, currentPage: p }; let i = index"
+     class="comment-body">
+    <p>{{ comment.sender_first_name }} {{ comment.sender_last_name }}</p>
+    <div class="edit-btns" *ngIf = "current_user !== null">
+        <img *ngIf="current_user.email === comment.sender && current_user !== null" class="edit edit-mode"
+              src="./src/assets/img/rubbish-bin.png"
+              (click)="open(doYouWannaDelete, comment, i)">
+        <img *ngIf="current_user.email === comment.sender && +comment.time_passed < 1800 && current_user !== null"
+             class="edit" src="./src/assets/img/edit.png"
+             (click)="edit(i)">
+    </div>
+    <img class="photo" src="{{ comment.image }}"
+         alt="photo">
+    <p class="comment-text">{{ comment.content }}</p>
+    <div class="editMode">
+        <textarea type="text" [(ngModel)]="comment.content"></textarea>
+        <div class="btn-block">
+            <button (click)="save(comment, i)">Save</button>
+            <button (click)="cancel(i)">Cancel</button>
+        </div>
+    </div>
+    <p class="comment-time">{{ comment.date | date: 'short'}} </p>
+</div>
+<div *ngIf="comments.length == 0" class="comment-body without-comments">User hasn't comments yet</div>
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
+<ng-template #doYouWannaDelete let-c="close" let-d="dismiss">
+    <h2 class="title">Are you sure to delete this order?</h2>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+    </button>
+    <div class="modal_btns">
+        <a (click)="delete(i)" (click)="d('Cross click')">Yes{{ i }}</a>
+        <a (click)="d('Cross click')">No</a>
+    </div>
+</ng-template>
+</div>
+

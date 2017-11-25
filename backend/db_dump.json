@@ -1,0 +1,503 @@
+[
+  {
+    "model": "authentication.authuser",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$36000$q6rXVVjfjvQU$k2KPpMdHh0F5zFpTjjcOY5DMy5BdFs9wp0GRqyjscXw=",
+      "last_login": "2017-11-02T11:22:56.934Z",
+      "is_superuser": false,
+      "first_name": "Sansa",
+      "last_name": "Stark",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2017-11-02T10:07:35.531Z",
+      "email": "sansastark@gmail.com",
+      "created": "2017-11-02T10:07:35.574Z",
+      "updated": "2017-11-02T10:07:35.574Z",
+      "deleted": false,
+      "purge_date": null,
+      "uuid": "b37f3fb9-414b-4fbf-9fa4-e1d6f7e0f82b",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "authentication.authuser",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$36000$vTh3xeymgZfS$gSgf1qhTP97FcgIymjIkRWYpQB60f/5WGaaI0Wz5Iyk=",
+      "last_login": "2017-11-02T12:32:01.867Z",
+      "is_superuser": false,
+      "first_name": "Jon",
+      "last_name": "Snow",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2017-11-02T10:08:05.787Z",
+      "email": "jonsnow@gmail.com",
+      "created": "2017-11-02T10:08:05.826Z",
+      "updated": "2017-11-02T10:08:05.826Z",
+      "deleted": false,
+      "purge_date": null,
+      "uuid": "389e6130-b6bc-4108-9865-0aff9d306a6f",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "authentication.authuser",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$36000$w914wI4IuW0o$3jJDBqGwHZqyapL1CBTaCa7Kk0pPopDa79v/svqRJZg=",
+      "last_login": "2017-11-02T12:36:09.649Z",
+      "is_superuser": false,
+      "first_name": "Petyr",
+      "last_name": "Baelish",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2017-11-02T10:08:18.884Z",
+      "email": "petyrbaelish@gmail.com",
+      "created": "2017-11-02T10:08:18.927Z",
+      "updated": "2017-11-02T10:08:18.927Z",
+      "deleted": false,
+      "purge_date": null,
+      "uuid": "759da65e-50b6-4b1f-8a8f-c46cf300ba8a",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "authentication.authuser",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$36000$wIl6LLEs8n0J$yGYPkLU90FJEfjeWdLlaeFk60tW64ulFb2Llu358Rb8=",
+      "last_login": "2017-11-02T12:42:02.567Z",
+      "is_superuser": false,
+      "first_name": "Ned",
+      "last_name": "Stark",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2017-11-02T10:10:04.524Z",
+      "email": "nedstark@gmail.com",
+      "created": "2017-11-02T10:10:04.571Z",
+      "updated": "2017-11-02T10:10:04.571Z",
+      "deleted": false,
+      "purge_date": null,
+      "uuid": "e1c22bdb-00de-451b-8a5c-89b304af2d31",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "authentication.authuser",
+    "pk": 5,
+    "fields": {
+      "password": "pbkdf2_sha256$36000$pGBxKHMtQpFd$X9aCzZtQFYYdCNtgmKq5/VKF1X0XkOjxPB0pYdubVuQ=",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "Ramsay",
+      "last_name": "Bolton",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2017-11-02T10:12:44.989Z",
+      "email": "ramsaybolton@gmail.com",
+      "created": "2017-11-02T10:12:45.029Z",
+      "updated": "2017-11-02T10:12:45.029Z",
+      "deleted": false,
+      "purge_date": null,
+      "uuid": "55975113-d95f-4276-a149-76aec142deab",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "authentication.authuser",
+    "pk": 6,
+    "fields": {
+      "password": "pbkdf2_sha256$36000$AZOxUfzHgW8C$B5CziQ19VzU2AgwmugzRY0yqZDrq1McaOZjv7xYc5bs=",
+      "last_login": "2017-11-02T10:26:51.160Z",
+      "is_superuser": true,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2017-11-02T10:19:16.102Z",
+      "email": "admin@gmail.com",
+      "created": "2017-11-02T10:19:16.149Z",
+      "updated": "2017-11-02T10:19:16.149Z",
+      "deleted": false,
+      "purge_date": null,
+      "uuid": "ab9a285b-6ff0-4cc8-b18c-fc0722bd3592",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "messaging.dialog",
+    "pk": 1,
+    "fields": {
+      "order": 1,
+      "title": "Dialog in Order #1"
+    }
+  },
+  {
+    "model": "messaging.dialog",
+    "pk": 2,
+    "fields": {
+      "order": 2,
+      "title": "Dialog in Order #2"
+    }
+  },
+  {
+    "model": "messaging.message",
+    "pk": 1,
+    "fields": {
+      "sender": 2,
+      "dialog": 1,
+      "text": "Hello, are you here?",
+      "date": "2017-11-02T12:40:56.188Z"
+    }
+  },
+  {
+    "model": "messaging.message",
+    "pk": 2,
+    "fields": {
+      "sender": 3,
+      "dialog": 1,
+      "text": "Yes",
+      "date": "2017-11-02T12:41:01.352Z"
+    }
+  },
+  {
+    "model": "messaging.message",
+    "pk": 3,
+    "fields": {
+      "sender": 3,
+      "dialog": 1,
+      "text": "I am on my way to take your pizza",
+      "date": "2017-11-02T12:41:10.024Z"
+    }
+  },
+  {
+    "model": "messaging.message",
+    "pk": 4,
+    "fields": {
+      "sender": 3,
+      "dialog": 1,
+      "text": "Around 20 minutes",
+      "date": "2017-11-02T12:41:13.399Z"
+    }
+  },
+  {
+    "model": "messaging.message",
+    "pk": 5,
+    "fields": {
+      "sender": 2,
+      "dialog": 1,
+      "text": "Ok, waiting for you",
+      "date": "2017-11-02T12:41:18.525Z"
+    }
+  },
+  {
+    "model": "messaging.message",
+    "pk": 6,
+    "fields": {
+      "sender": 2,
+      "dialog": 2,
+      "text": "Where is my ice cream, my friend?",
+      "date": "2017-11-02T12:47:41.474Z"
+    }
+  },
+  {
+    "model": "messaging.message",
+    "pk": 7,
+    "fields": {
+      "sender": 3,
+      "dialog": 2,
+      "text": "I want you to pay me more money, okay?",
+      "date": "2017-11-02T12:48:10.622Z"
+    }
+  },
+  {
+    "model": "messaging.message",
+    "pk": 8,
+    "fields": {
+      "sender": 3,
+      "dialog": 2,
+      "text": "Plus 20$",
+      "date": "2017-11-02T12:48:16.055Z"
+    }
+  },
+  {
+    "model": "messaging.message",
+    "pk": 9,
+    "fields": {
+      "sender": 2,
+      "dialog": 2,
+      "text": "Deal",
+      "date": "2017-11-02T12:48:18.344Z"
+    }
+  },
+  {
+    "model": "orders.order",
+    "pk": 1,
+    "fields": {
+      "title": "Two meat pizzas",
+      "cordinate_from": {
+        "lat": 50.43583265730206,
+        "lng": 30.529696941375732
+      },
+      "cordinate_to": {
+        "lat": 50.42763157162549,
+        "lng": 30.539653301239014
+      },
+      "customer": 2,
+      "curier": 3,
+      "delivery_price": 20,
+      "order_price": 100,
+      "description": "Want some delicious pizza, two pieces, with meat and mushrooms.",
+      "from_time": "2017-11-02T12:32:00Z",
+      "to_time": "2017-11-02T13:30:00Z",
+      "status": "active",
+      "uuid": "88d7b31f-1904-4bc3-9efb-8f61d1db232b"
+    }
+  },
+  {
+    "model": "orders.order",
+    "pk": 2,
+    "fields": {
+      "title": "Ice cream with strawberries",
+      "cordinate_from": {
+        "lat": 50.421206395596,
+        "lng": 30.520362854003906
+      },
+      "cordinate_to": {
+        "lat": 50.39779497900549,
+        "lng": 30.555896759033203
+      },
+      "customer": 2,
+      "curier": 3,
+      "delivery_price": 15,
+      "order_price": 80,
+      "description": "Want strawberry ice cream.",
+      "from_time": "2017-11-02T12:45:00Z",
+      "to_time": "2017-11-02T14:45:00Z",
+      "status": "active",
+      "uuid": "1c7560bc-f02f-49a8-bcfb-d51098c0c97a"
+    }
+  },
+  {
+    "model": "orders.candidate",
+    "pk": 1,
+    "fields": {
+      "order": 1,
+      "candidate": 3,
+      "timeBid": "2017-11-02T12:36:34.882Z",
+      "isChosen": false
+    }
+  },
+  {
+    "model": "orders.candidate",
+    "pk": 2,
+    "fields": {
+      "order": 2,
+      "candidate": 3,
+      "timeBid": "2017-11-02T12:46:23.788Z",
+      "isChosen": false
+    }
+  },
+  {
+    "model": "otc.onetimecode",
+    "pk": "22d5b45e-bfb5-11e7-baf7-186590dc1f8d",
+    "fields": {
+      "otc_type": "user_registration",
+      "data": {
+        "tmp_user_pk": 3
+      },
+      "active": true,
+      "created_date": "2017-11-02T10:03:55.252Z"
+    }
+  },
+  {
+    "model": "otc.onetimecode",
+    "pk": "2596f512-bfb6-11e7-8524-186590dc1f8d",
+    "fields": {
+      "otc_type": "user_registration",
+      "data": {
+        "tmp_user_pk": 5
+      },
+      "active": true,
+      "created_date": "2017-11-02T10:11:09.370Z"
+    }
+  },
+  {
+    "model": "otc.onetimecode",
+    "pk": "74a81d36-bfaf-11e7-8b3f-186590dc1f8d",
+    "fields": {
+      "otc_type": "user_registration",
+      "data": {
+        "tmp_user_pk": 1
+      },
+      "active": true,
+      "created_date": "2017-11-02T09:23:15.577Z"
+    }
+  },
+  {
+    "model": "otc.onetimecode",
+    "pk": "bffa833a-bfb4-11e7-89f7-186590dc1f8d",
+    "fields": {
+      "otc_type": "user_registration",
+      "data": {
+        "tmp_user_pk": 2
+      },
+      "active": true,
+      "created_date": "2017-11-02T10:01:09.398Z"
+    }
+  },
+  {
+    "model": "otc.onetimecode",
+    "pk": "ed2663b6-bfb5-11e7-ac4f-186590dc1f8d",
+    "fields": {
+      "otc_type": "user_registration",
+      "data": {
+        "tmp_user_pk": 4
+      },
+      "active": true,
+      "created_date": "2017-11-02T10:09:34.681Z"
+    }
+  },
+  {
+    "model": "payments.payrequest",
+    "pk": 1,
+    "fields": {
+      "order": 1,
+      "payee": 2,
+      "payor": null,
+      "created": "2017-11-02T12:36:52.966Z"
+    }
+  },
+  {
+    "model": "payments.payrequest",
+    "pk": 2,
+    "fields": {
+      "order": 2,
+      "payee": 2,
+      "payor": null,
+      "created": "2017-11-02T12:46:33.615Z"
+    }
+  },
+  {
+    "model": "profiles.profile",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "phone_number": "+ (380) 501-111-111",
+      "image": "img/authentication/tmpusers/pic-1.png",
+      "blocked_users": "[]",
+      "rating": 0.0,
+      "city": 435,
+      "notification_info": {
+        "1": "1"
+      },
+      "share_info": {
+        "1": "1"
+      },
+      "card_number": "1234123412341234",
+      "birth_date": "1963-02-13",
+      "about_me": "",
+      "created": "2017-11-02T10:07:35.579Z",
+      "updated": "2017-11-02T11:23:58.942Z"
+    }
+  },
+  {
+    "model": "profiles.profile",
+    "pk": 2,
+    "fields": {
+      "user": 2,
+      "phone_number": "+ (380) 509-998-877",
+      "image": "img/authentication/tmpusers/pic-2.png",
+      "blocked_users": "[]",
+      "rating": 0.0,
+      "city": 37,
+      "notification_info": {
+        "1": "1"
+      },
+      "share_info": {
+        "1": "1"
+      },
+      "card_number": "1212121212121212",
+      "birth_date": "1947-05-23",
+      "about_me": "",
+      "created": "2017-11-02T10:08:05.829Z",
+      "updated": "2017-11-02T11:29:18.658Z"
+    }
+  },
+  {
+    "model": "profiles.profile",
+    "pk": 3,
+    "fields": {
+      "user": 3,
+      "phone_number": "+ (380) 509-998-877",
+      "image": "img/authentication/tmpusers/pic-3.png",
+      "blocked_users": "[]",
+      "rating": 0.0,
+      "city": 6,
+      "notification_info": {
+        "1": "1"
+      },
+      "share_info": {
+        "1": "1"
+      },
+      "card_number": "7878878778788787",
+      "birth_date": "1935-02-26",
+      "about_me": "",
+      "created": "2017-11-02T10:08:18.928Z",
+      "updated": "2017-11-02T11:29:29.993Z"
+    }
+  },
+  {
+    "model": "profiles.profile",
+    "pk": 4,
+    "fields": {
+      "user": 4,
+      "phone_number": "+ (380) 504-324-323",
+      "image": "img/authentication/tmpusers/pic-4.png",
+      "blocked_users": "[]",
+      "rating": 0.0,
+      "city": 998,
+      "notification_info": {
+        "1": "1"
+      },
+      "share_info": {
+        "1": "1"
+      },
+      "card_number": "9000800087877878",
+      "birth_date": "1952-07-13",
+      "about_me": "",
+      "created": "2017-11-02T10:10:04.573Z",
+      "updated": "2017-11-02T11:29:38.829Z"
+    }
+  },
+  {
+    "model": "profiles.profile",
+    "pk": 5,
+    "fields": {
+      "user": 5,
+      "phone_number": "+ (380) 634-564-545",
+      "image": "img/authentication/tmpusers/pic-5.png",
+      "blocked_users": "[]",
+      "rating": 0.0,
+      "city": 37,
+      "notification_info": {
+        "1": "1"
+      },
+      "share_info": {
+        "1": "1"
+      },
+      "card_number": "7878767656753434",
+      "birth_date": "1978-06-16",
+      "about_me": "",
+      "created": "2017-11-02T10:12:45.032Z",
+      "updated": "2017-11-02T11:29:51.867Z"
+    }
+  }
+]

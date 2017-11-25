@@ -1,0 +1,10 @@
+FROM python:3.5.4-jessie
+
+COPY ./backend .
+#RUN apt-get update -y && apt-get install nginx -y && service nginx start
+RUN pip install --no-cache-dir -r requirements.txt
+#COPY ./backend/CI/publish.sh .
+COPY ./backend/CI/deploy.sh .
+EXPOSE 5432
+ENTRYPOINT ["./deploy.sh"]
+

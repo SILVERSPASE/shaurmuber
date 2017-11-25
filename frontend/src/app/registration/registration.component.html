@@ -1,0 +1,245 @@
+<h1 align="center">Registration</h1>
+
+
+<div class="container">
+  <div class="col-md-6 col-md-offset-3">
+
+    <tabset [justified]="true" #staticTabs>
+
+      <!--Account setup-->
+      <tab heading="ACCOUNT SETUP">
+        <form [formGroup]="registrationForm" class="form" (ngSubmit)="registerAccount()">
+
+          <!-- First Name -->
+          <div class="form-group">
+            <label for="first_name">First Name</label>
+
+            <input type="text" class="form-control" id="first_name"
+                   formControlName="first_name" placeholder="First name"
+                   (blur)="onValueChange()"/>
+
+            <div *ngIf="formErrors.first_name" class="alert alert-danger">
+              {{ formErrors.first_name }}
+            </div>
+          </div>
+
+          <!-- Last Name -->
+          <div class="form-group">
+            <label for="last_name">Last Name</label>
+
+            <input type="text" class="form-control" id="last_name"
+                   formControlName="last_name" placeholder="Last name"
+                   (blur)="onValueChange()"/>
+
+            <div *ngIf="formErrors.last_name" class="alert alert-danger">
+              {{ formErrors.last_name }}
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <label for="email">Email</label>
+
+            <input type="email" class="form-control" id="email"
+                   formControlName="email" placeholder="Email"
+                   (blur)="onValueChange()"/>
+
+
+            <div *ngIf="formErrors.email" class="alert alert-danger">
+              {{ formErrors.email }}
+            </div>
+          </div>
+
+          <!-- Phone Number -->
+          <div class="form-group">
+
+            <label for="phone_number">Phone Number</label>
+
+            <input type="text" class="form-control" id="phone_number"
+                   placeholder="+ (380) 999-999-999" [textMask]="{mask: phone_mask}"
+                   pattern="\+ \(\d{3}\) \d{3}-\d{3}-\d{3}"
+                   formControlName="phone_number" (blur)="onValueChange()"/>
+
+            <div *ngIf="formErrors.phone_number" class="alert alert-danger">
+              {{ formErrors.phone_number }}
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="form-group">
+            <label for="password">Password</label>
+
+            <input type="password" class="form-control" id="password"
+                   formControlName="password" placeholder="Password"
+                   (blur)="onValueChange()"/>
+
+            <div *ngIf="formErrors.password" class="alert alert-danger">
+              {{ formErrors.password }}
+            </div>
+          </div>
+
+          <!-- Password confirm -->
+          <div class="form-group">
+            <label for="confirm_password">Confirm password</label>
+            <input type="password" class="form-control" id="confirm_password"
+                   formControlName="confirm_password" placeholder="Retype password"
+                   (blur)="onValueChange()"/>
+
+            <div *ngIf="formErrors.confirm_password" class="alert alert-danger">
+              {{ formErrors.confirm_password }}
+            </div>
+
+            <div *ngIf="!flag" class="alert alert-danger">
+              Passwords are mismatched!
+            </div>
+          </div>
+
+
+          <!-- Submit -->
+          <div class="form-group">
+            <button type="submit" [disabled]="registrationForm.invalid" class="btn btn-primary next">NEXT</button>
+          </div>
+        </form>
+      </tab>
+
+      <!--Payment card-->
+      <tab  heading="PAYMENT">
+          <form [formGroup]="PaymentForm" class="form" (ngSubmit)="registerPayments()">
+              <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="credit-card-div">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="row" >
+                                        <h3 class="panel-title display" >Payment Details</h3>
+                                        <img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <h5 class="text-muted"> Credit Card Number</h5>
+                                        </div>
+                                        <div class="col-md-3 col-sm-3 col-xs-3">
+                                            <input type="text" class="form-control"
+                                            placeholder="0000" [textMask]="{mask: card_mask}"
+                                            formControlName="card_number1"/>
+                                        </div>
+                                        <div class="col-md-3 col-sm-3 col-xs-3">
+                                            <input type="text" class="form-control" placeholder="0000"
+                                            [textMask]="{mask: card_mask}"
+                                            formControlName="card_number2"/>
+                                        </div>
+                                        <div class="col-md-3 col-sm-3 col-xs-3">
+                                            <input type="text" class="form-control" placeholder="0000"
+                                            [textMask]="{mask: card_mask}"
+                                            formControlName="card_number3"/>
+                                        </div>
+                                        <div class="col-md-3 col-sm-3 col-xs-3">
+                                            <input type="text" class="form-control" placeholder="0000"
+                                            [textMask]="{mask: card_mask}"
+                                            formControlName="card_number4"/>
+                                        </div>
+                                    </div>
+                                    <div class="row ">
+                                        <div class="col-md-9 col-sm-9 col-xs-9">
+                                            <h2>{{this.user.first_name}} {{this.user.last_name}}</h2>
+                                        </div>
+                                        <div class="col-md-3 col-sm-3 col-xs-3 next">
+                                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAGp0lEQVR4nO1YPY8cxxF9NdOzPbN7JG/PkuiA9gVHGDBlKiVghfoFBMhAkAAJzvkrqIgBI8b8AWcSTu3YBgQJJmRDDkQ4smgTMAjwyL3jzs7OTD8HM/01O3c8wwKsYBt7d9XV1VWvPrq694Dt2I7t2I7t+B+GjDHv3Lkzyv+hBgkA/K/2PHjwYHRDBPT+/fs70+n0o7Zt94ZrPySYt+1h/AsAUFXV8unTp38yxvz74cOHteU7kPfu3du5efPm7w8ODn49bnTc4BiYIY+e+db1Ifhw7dmzZ3+/e/fux+v1+q+Hh4ctACRWyWw2++jq1asfioh1SgBID1w8XyRcE4H0PDh56dcDPYhoxvpp6cBuB15AT1+58rNfXP/gg0/atr1gcSsAuHXrlrx8+XLv22//5jyO/oL202XCRiv4Sytg5y7iRLeFG3T3octI70yvi4E9z3v96tVPARQAXjkH6rrGP75/Jr99/Dta46TxtOE4P5wbgrRyXsYYkjRWPtAZ6fEyvS3TzQPdnTxEEoi4ylEAYAxBY0BjJFAoxhsVD9DJxHPTy8UypKGQBoZu3YKX03U48B2GQF7SNOouyqUZgDEmjGxAuyjARNEP5MzIvjEeebqdc8inSRIcOecArCADBXGKzUgZ2MiaQO6U1EfrfTbN0NY55BNyLAPdgTWuhIYp7tPqyyQ0LN6AES8/VipDPW8rrU15UgFjDhD9wTEj5WMBm8F8JPVRiZmhntPLzZxTfnjnKABI0xQCAVtjS8BG5qxOE5TXRtmRNF1ziOXPLJXzym84kGUZ3n//Gj77/HMJrr7+Yulp3/gtHyQIUHopS7MrU1qRsb3sL6mOZqzDsXuZTk0nc3h4iCdPnsQOKKWgtcZ8dxcWXHi4Y1rcejj3YnbNFqY/Y26VMX+MdnYZaCGgdb6ZgQCgC3pABnCs5ghMOGfAxBjtyVA8pulv9ci94QMvcoD+HYKyLKmyTKwjXSqHtHNZGKSZfdkg5o3Q3TuoD1Wnc8Dv3kGEUoqz6Uxi6BsZcKAgItCTie8GPiv9T/BeCeZdMvp5B8IlKJyTXt+yLGHaFoad3SRJ0DQNRARN0yDLMiiVubfW0Im4hHxoYYyNle0MDjQHoBk44mNqQdPFGX7J6/z6q69AGs5mO3j+/Dn29/e5WCxwdHSE+XzOX12/Dq21K+ngsG060D9rbVsbpN4BlCDSXQl5ZNIDdpdRXCpdCfUGhCB+ee0aiyKXqlrj5/v7nM2mcvTyCAdXD1gUUymKwqbvbSXUeWBHWZa9w4OuEnQXf37DMtuU88/hsNQ6O3t7c4BAnueutN67fDnSkSRJv+8UB1zH6tFOtB7tEiGWMzvImT1mnLHReYKPTXjUk+IMuAUJwi7BUnDRdJdU0CGHF0/PcyBHad+pQAxo38tt2TC8HMccsOk/X5+OW3K4yUVvM7phhs6INEZFguWBB4Mz4KN5fHwiIoLWtBSIJEkCY1oaUnKdI8syLMsl26YVQ4NpMeXxybEkSUIAorXGJJtwtVpJ/55n27aSJAmatqX02djZ2WHTNFIuSxhjmKpUQKBpW2ZKSdO2mM1mYZZOdyA8eOt6japaI89zqDTFqlphkk2wWpVdWwNRVWu0bYu6rrFYHENrjbouoXUOkRqZylCtK5ycvEGWZUiSBAJAZRnW6zWKogAJNE2LumlgTIuT5RIgkaYK1IRSCj6HZ5UQwmwTaap48aLGalVB5ZokofUEVVUxTVKARJYpiICZUpjOpnj9esFLly5huSyZZQoEMckm/MmeRtM0WNdrpkkKYwzqumaSJNCTCZRKaYyB1jmmxZQEUa0qZJlimqa2A4110fD7APp7oBO+eOGCAERRFAQh3c0Mzudzd4h7Y+7ZsLt7SUBQ69y9RidaC0CoLGNe5E52Z2fm7plEEpnP574RgJhMdNcw6A6OhIdtMwNBrx4cUkcHh3GT9ufUZ9odu4DnT2NUGvRG3N6hPEfSEL2FHOABmNPoMSfCWnUQzgC36VgMOHYUwMADBQBN06Cumyp48Yx0zY3Lyje/UzrjWFsMnBksB33SOxj40FGtaWsAJnLg0aNH3N3d/fLFixf/eufdd67A1pxXJ4ESGQCOL7JxnsUngcsSAB7Ie1vuawkpi8Xi5Ol33/0ZwDJyAADKsvznF1/c/fTGjRu/yfP8MoHUp4yeHPA2pxzlbZbA+XiWs16vy798880f37x58wcAJ1Ys+hf67du3M2PMLoALCP7x+yMZDYAFgNePHz9u/99gtmM7tmM7tuPHMf4DjEOG/uidi0QAAAAASUVORK5CYII=" class="img-rounded" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 pad-adjust">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" checked class="text-muted"> Save details for fast payments. <a href="#">Learn More</a>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- CREDIT CARD DIV END -->
+                    </div>
+                  </div>
+                  <div class="row ">
+                      <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust">
+                          <input type="button" (click)="selectTab(0)" class="btn btn-warning" value="BACK" />
+                      </div>
+                      <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust">
+                          <input type="submit" class="btn btn-primary next" value="NEXT" />
+                      </div>
+                  </div>
+              </div>
+          </form>
+
+      </tab>
+
+      <!--Additional info-->
+      <tab heading="ADDITIONAL INFO">
+        <form [formGroup]="AdditionalInfoForm" class="form" (ngSubmit)="registerAdditionalInfo()">
+            <!-- Birth Date -->
+            <div class="form-group">
+              <label for="birth_date">Date of Birth</label>
+              <input type="text" id="birth_date" formControlName="birth_date"
+                     [minDate]="minDate" [maxDate] = "maxDate"
+                     placeholder=" Choose date" bsDatepicker/>
+            </div>
+
+            <!-- City and Region -->
+            <div class="form-group">
+              <!-- Region -->
+              <label>Region:</label>
+              <select (change)="onRegionChange(regions[$event.target.selectedIndex - 1])">
+                <option>Select region</option>
+                <option *ngFor="let r of regions">
+                  {{ r }}
+                </option>
+              </select>
+
+              <!-- City -->
+              <label for="city">City:</label>
+              <select id="city" [(ngModel)]="this.user.city" formControlName="city">
+                <option *ngFor="let c of cities" [value]="c.city_name">
+                  {{ c.city_name }}
+                </option>
+              </select>
+            </div>
+            <!--About me-->
+            <div class="form-group">
+                <div class="container-fluid">
+                  <label for="about_me">About me</label><br/>
+                  <textarea id="about_me" formControlName="about_me" class="form-control"
+                            rows="4" placeholder="Write about yourself"></textarea>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust">
+                    <input type="button" (click)="selectTab(1)" class="btn btn-warning" value="BACK" />
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6 pad-adjust">
+                    <input type="submit" (click)="open(registration)" class="btn btn-primary next" value="LET'S GO!" />
+                </div>
+            </div>
+
+        </form>
+      </tab>
+
+    </tabset>
+
+  </div>
+</div>
+
+<ng-template #registration let-c="close" let-d="dismiss">
+  <h2 class="modal-title center-block title" >SUCCESS!</h2>
+  <img class="center-block" src="./src/assets/images/happy-2.png">
+  <h3 class="modal-title center-block title">Thank You! Please check your email to activate your account</h3>
+  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+  </button>
+  <div class="modal_btns">
+    <a routerLink="/" (click)="d('Cross click')">OK</a>
+  </div>
+</ng-template>

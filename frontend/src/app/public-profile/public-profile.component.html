@@ -1,0 +1,84 @@
+<div class="container">
+
+
+<div class="col-md-6 col-md-offset-3 main">
+
+    <!-- Profile Basic Info -->
+    <div class="row">
+        <div class="profile-basic-info">
+
+            <!-- Profile picture -->
+            <div class="col-md-6">
+                <img src="{{ profilePic }}" alt="Profile picture" class="profile-picture">
+            </div>
+
+            <!-- Info according to privacy settings -->
+            <div class="col-md-6">
+                <h2 *ngIf="user?.first_name && user?.last_name">
+                    {{ user.first_name }} {{ user.last_name }}
+                </h2>
+
+                <!-- Rating -->
+                <div class="rating" *ngIf="profile">
+                    <b>Rating: </b>
+                    <ng-template #t let-fill="fill">
+                      <span *ngIf="fill === 100" class="star full">&#9733;</span>
+                      <span *ngIf="fill === 0" class="star">&#9733;</span>
+                      <span *ngIf="fill < 100 && fill > 0" class="star">
+                        <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+                      </span>
+                    </ng-template>
+                    <ngb-rating [rate]="profile.rating" [starTemplate]="t"></ngb-rating>
+                    &nbsp; <span style="color: darkorange;">{{ profile.rating }}</span>
+                </div>
+
+                <!-- Email -->
+                <div *ngIf="user?.email && user.email != 'Private'">
+                    <b>Email: </b>
+                    {{ user.email }}
+                </div>
+
+                <!-- Phone -->
+                <div *ngIf="user?.phone && user.phone != 'Private'">
+                    <b>Phone number: </b>
+                    {{ user.phone }}
+                </div>
+
+                <!-- Birth Date -->
+                <div *ngIf="user?.birth_date && user.birth_date != 'Private'">
+                    <b>Date of birth: </b>
+                    {{ user.birth_date }}
+                </div>
+
+                <!-- City -->
+                <div *ngIf="city && user.city != 'Private'">
+                    <b>From: </b>
+                    {{ city }}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+<div class="container">
+<div class="col-md-6 col-md-offset-3 main">
+    <!-- About and Comments -->
+    <div class="row">
+        <div *ngIf="user?.about_me && user.about_me != 'Private'" class="profile-about">
+            <h3>About me</h3>
+            <p>
+                {{ user.about_me }}
+            </p>
+        </div>
+        <hr>
+        <div class="profile-comments">
+            <h3>Comments</h3>
+            <app-comments></app-comments>
+        </div>
+    </div>
+</div>
+</div>

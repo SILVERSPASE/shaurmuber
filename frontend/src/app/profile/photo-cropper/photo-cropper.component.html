@@ -1,0 +1,16 @@
+<div class="modal-body">
+    <img-cropper [image]="data" [settings]="cropperSettings" (onCrop)="cropped($event)"></img-cropper>
+    <p class="result text-center" *ngIf="data.image" >
+        Max file length: 1000000 
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Current file length : {{data.image.length}}
+    </p>
+</div>
+<div id="tooBigImage" class="result-modal alert alert-danger alert-dismissible text-center" role="alert">
+    <strong>Error!</strong> Too big image!
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-success" (click)="uploadPhoto()" >Change</button>
+</div>
+

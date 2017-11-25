@@ -1,0 +1,164 @@
+<!-- Carousel -->
+<div class="container">
+
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+
+      <!-- Slide -->
+      <div class="item active">
+        <img class="first-slide slide-scaling" src="assets/img/slide-1.jpg">
+        <div class="container">
+          <div class="carousel-caption">
+            <h1>Instant street food delivery.</h1>
+            <p>
+              Earn money by delivering food and improving your profile as a courier
+              or wait for a delivery.
+            </p>
+            <p><a class="btn btn-primary btn-lg" href="#">Join for Free</a></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide -->
+      <div class="item">
+        <img class="second-slide slide-scaling" src="assets/img/slide-2.jpg">
+        <div class="container">
+          <div class="carousel-caption">
+            <h1>Deliver street food and earn money.</h1>
+            <p>
+              Earn money by delivering street food to the destination point and improve
+              your profile as a courier.
+            </p>
+            <p>
+              <a class="btn btn-primary btn-lg" href="#">Join for Free</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide -->
+      <div class="item">
+        <img class="third-slide slide-scaling" src="assets/img/slide-3.jpeg">
+        <div class="container">
+          <div class="carousel-caption">
+            <h1>Order street food.</h1>
+            <p>
+              Post your order with a street food name and other options
+              including destination point. Wait for replies from couriers, select
+              the best one and wait for your delivery. Confirm and enjoy.
+            </p>
+            <p>
+              <a class="btn btn-primary btn-lg" href="#">Join for Free</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Prev -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+
+    <!-- Next -->
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+
+  </div>
+</div>
+
+<!-- Create or Deliver -->
+<div class="container">
+  <hr>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <div class="col-md-6  block" style="right: 5px;">
+        <h2>Create Order</h2>
+        <p class="content">
+          Create an order with information about your desired food, pickup
+          address, destination point, price and courier reward and many more.
+          Select the courier that matches you the best and wait for a delivery.
+          Finally confirm delivery and enjoy your food.
+        </p>
+        <p>
+          <a routerLink="/create-order" class="btn btn-default" *ngIf="currentUser">Create an order</a>
+          <a (click)="open(pleaseRegister)" class="btn btn-default" *ngIf="!currentUser">Create an order</a>
+        </p>
+      </div>
+      <div class="col-md-6 block" style="left: 5px;">
+        <h2>Deliver Food</h2>
+        <p  class="content">
+          Earn money by delivering food from pickup address to destination point.
+          Select an order that satisfies your reward price expectations and
+          deliver the food to the customer. Improve your courier profile by
+          delivering in shortest amount of time with the best food condition.
+        </p>
+        <p>
+          <a routerLink="/orders" class="btn btn-default">Explore map</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- How it works -->
+<div class="container">
+  <hr>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h2>How it works</h2>
+      <h4>Just three easy steps to start using ShaurmUber and enjoying your meal</h4><br><br>
+    </div>
+  </div>
+
+  <div class="row text-center">
+    <div class="col-md-4">
+      <span class="glyphicon glyphicon-plus home-icon" aria-hidden="true"></span>
+      <h3>Create an order</h3>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum cursus
+        massa id lorem varius, non suscipit lacus luctus. Aenean non ante sit amet
+        felis pellentesque facilisis non in nibh.
+      </p>
+    </div>
+    <div class="col-md-4">
+      <span class="glyphicon glyphicon-flash home-icon" aria-hidden="true"></span>
+      <h3>Select courier</h3>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum cursus
+        massa id lorem varius, non suscipit lacus luctus. Aenean non ante sit amet
+        felis pellentesque facilisis non in nibh.
+      </p>
+    </div>
+    <div class="col-md-4">
+      <span class="glyphicon glyphicon-heart home-icon" aria-hidden="true"></span>
+      <h3>Confirm and enjoy</h3>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum cursus
+        massa id lorem varius, non suscipit lacus luctus. Aenean non ante sit amet
+        felis pellentesque facilisis non in nibh.
+      </p>
+    </div>
+  </div>
+</div>
+
+<ng-template #pleaseRegister let-c="close" let-d="dismiss">
+  <h2 class="modal-title center-block title" >Please login or register</h2>
+  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+    <!--<span aria-hidden="true">&times;</span>-->
+  </button>
+  <div class="modal_btns">
+    <a routerLink="/registration" (click)="d('Cross click')">Registration</a>
+    <a routerLink="/login" (click)="d('Cross click')">Log In</a>
+  </div>
+</ng-template>

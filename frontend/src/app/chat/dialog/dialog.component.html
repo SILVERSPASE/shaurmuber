@@ -1,0 +1,68 @@
+<div *ngIf="isDataAvailable" class="container">
+  <div class="row bootstrap snippets">
+      <div class="col-md-12">
+        <!-- DIRECT CHAT PRIMARY -->
+        <div class="box box-primary direct-chat direct-chat-primary">
+          <div class="box-header with-border">
+            <h2 class="box-title">{{dialog.title}}</h2>
+            <h2 class="box-title right pull-right">
+              {{onlineStatus}}
+            </h2>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body">
+            <!-- Conversations are loaded here -->
+            <div class="direct-chat-messages pre-scrollable" #scrolling>
+              <!-- Message. Default to the left -->
+
+              <div *ngFor="let message of messages">
+                <div *ngIf="message.sender === currentUser.id" class="direct-chat-msg left">
+                  <div class="direct-chat-info clearfix">
+                    <span class="direct-chat-name pull-left"> {{message.sender_first_name}} {{message.sender_last_name}}</span>
+                    <span class="direct-chat-timestamp pull-right">{{getDate(message.date)}}</span>
+                  </div>
+                  <!-- /.direct-chat-info -->
+                  <img class="direct-chat-img" src="{{ message.image }}" alt="Message User Image"><!-- /.direct-chat-img -->
+                  <div class="direct-chat-text">
+                    {{message.text}}
+                  </div>
+                  <!-- /.direct-chat-text -->
+                </div>
+                <!-- /.direct-chat-msg -->
+
+                <!-- Message to the right -->
+                <div *ngIf="message.sender !== currentUser.id" class="direct-chat-msg right">
+                  <div class="direct-chat-info clearfix">
+                    <span class="direct-chat-name pull-right">{{message.sender_first_name}} {{message.sender_last_name}}</span>
+                    <span class="direct-chat-timestamp pull-left">{{getDate(message.date)}}</span>
+                  </div>
+                  <!-- /.direct-chat-info -->
+                  <!--https://bootdey.com/img/Content/user_3.jpg-->
+                  <img class="direct-chat-img" src="{{ message.image }}" alt="Message User Image"><!-- /.direct-chat-img -->
+                  <div class="direct-chat-text">
+                    {{message.text}}
+                  </div>
+                  <!-- /.direct-chat-text -->
+                </div>
+              </div>
+              <!-- /.direct-chat-msg -->
+            </div>
+          </div>
+
+          <div class="box-footer">
+            <form method="post">
+              <div class="input-group">
+                <input type="text" name="message" placeholder="Type Message ..." class="form-control" #text>
+                <span class="input-group-btn">
+                  <button type="submit" class="btn btn-primary btn-flat"
+                          (click)="sendWSMessage(text.value); text.value=''">
+                      Send
+                    </button>
+                  </span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

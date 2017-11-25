@@ -1,0 +1,110 @@
+*{
+  transition: 0.3s ease-in-out;
+}
+.orders-block{
+    .tabs-head {
+      background: #313131;
+    }
+    .nav-tabs{
+        border: 0;
+        padding-bottom: 1px;
+        display: inline-block;
+    }
+    .nav-tabs > li{
+      float: none;
+      display: inline-block;
+      width: 177px;
+      text-align: center;
+      margin:0;
+
+    }
+    .nav > li.active > a{
+        background-color: #03a87c;
+        font-size: 18px;
+        border-radius: 0;
+        color: #fff;
+        border-color: #3CB371;
+        text-decoration: none;
+        transition: 0.3s ease-in-out;
+    }
+    // .nav > li.active:hover{
+    //     background-color: #fff;
+    //     font-size: 18px;
+    //     border-radius: 0;
+    //     font-weight: normal;
+    //     color: #fff;
+    //     border-color: #3CB371;
+    // }
+    .nav > li.active:hover > a:hover{
+        // background-color: #fff;
+        font-size: 18px;
+        border-radius: 0;
+        font-weight: normal;
+        color: #fff;
+        border-color: #3CB371;
+    }
+    .nav > li > a:hover{
+        color: #696969;
+        text-decoration: none!important;
+        //font-weight: bold;
+        border: 0;
+    }
+    .nav > li > a{
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+        border: 0;
+    }
+    .orders-list{
+        //height: 800px;
+        border-left: 2px solid #3CB371;
+        padding-top: 10px;
+        background-color: #fff;
+    }
+    .map{
+        padding: 0!important;
+        //height: 800px;
+    }
+}
+app-order-list{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 360px;
+    max-height: 580px;
+    overflow: auto;
+}
+
+
+@media screen and (max-width: 414px){
+  app-order-list{
+    top: 20px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  }
+}
+
+
+@media screen and (max-width: 360px){
+  app-order-list{
+    left: 0px;
+  }
+}
+
+
+
+@media screen and (max-width: 359px){
+  app-order-list{
+    top: 20px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 320px;
+  }
+  .nav-tabs > li{
+    width: 100%!important;
+  }
+}

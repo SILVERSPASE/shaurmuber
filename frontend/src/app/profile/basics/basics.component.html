@@ -1,0 +1,175 @@
+  <div class="col-md-12">
+    <div class="row">
+     <h3>Basics settings</h3>
+     <hr>
+     <div class="col-md-6 col-md-offset-3">
+
+       <!-- USER FORM -->
+       <form [formGroup]="userForm" >
+
+         <div class="form-group">
+          <label>First Name</label>
+          <input type="text" formControlName="first_name" class="form-control" (blur)="onFormChange(userForm)">
+
+          <div *ngIf="formErrors.first_name" class="alert alert-danger">
+            {{ formErrors.first_name }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" formControlName="last_name" class="form-control" 
+          (blur)="onFormChange(userForm)" >
+
+          <div *ngIf="formErrors.last_name" class="alert alert-danger">
+            {{ formErrors.last_name }}
+          </div>
+        </div>
+
+        <button class="btn btn-success" (click)="changeBasicks()" >Change</button>
+
+      </form>
+      <!-- /USER FORM -->
+
+    </div>
+  </div>
+
+  <div class="row">
+   <h3>Email</h3>
+   <hr>
+   <div class="col-md-6 col-md-offset-3">
+
+    <!-- EMAIL FORM -->
+    <form [formGroup]="emailForm">
+
+      <div class="form-group">
+       <label>Old Email</label>
+       <input type="email" class="form-control" disabled="" value={{user.email}}>
+     </div>
+
+     <div class="form-group">
+       <label>New Email</label>
+       <input type="email" formControlName="email" class="form-control"
+       (blur)="onFormChange(emailForm)" >
+
+       <div *ngIf="formErrors.email" class="alert alert-danger">
+        {{ formErrors.email }}
+      </div>
+    </div>
+    
+    <button class="btn btn-success" (click)="changeEmail()"> Change</button>
+
+  </form>
+  <!-- /EMAIL FORM -->
+
+</div>
+</div>
+
+
+<div class="row">
+ <h3>Password</h3>
+ <hr>
+ <div class="col-md-6 col-md-offset-3">
+
+   <!-- PASSWORD FORM -->
+   <form [formGroup]="passwordForm">
+     <div class="form-group">
+
+       <label>Old Password</label>
+       <input type="password" class="form-control" formControlName="old_password"      
+       (blur)="onFormChange(passwordForm)" >
+
+       <div *ngIf="formErrors.old_password" class="alert alert-danger">
+        {{ formErrors.old_password }}
+      </div>
+    </div>
+
+    <div class="form-group">
+     <label>New Password</label>
+     <input type="password" formControlName="new_password" class="form-control"
+     (blur)="onFormChange(passwordForm)" >
+
+     <div *ngIf="formErrors.new_password" class="alert alert-danger">
+      {{ formErrors.new_password }}
+    </div>
+  </div>
+
+  <div class="form-group">
+   <label>Confirm New Password</label>
+   <input type="password" formControlName="confirm_new_password" class="form-control"
+   (blur)="onFormChange(passwordForm)" >
+
+   <div *ngIf="formErrors.confirm_new_password" class="alert alert-danger">
+    {{ formErrors.confirm_new_password }}
+  </div>
+</div>
+
+<button class="btn btn-success" (click)="changePassword()">Change</button>
+</form>
+<!-- /PASSWORD FORM -->
+
+</div>
+</div>
+
+<div class="row">
+  <h3>Other</h3>
+  <hr>
+  <div class="col-md-6 col-md-offset-3">
+    <!-- OTHER INFO FORM -->
+    <form [formGroup]="otherInfoForm">
+
+      <div class="form-group">
+        <label>Region:</label>
+        <select class="form-control" (change)="onRegionChange(regions[$event.target.selectedIndex - 1])">
+          <option>Select region</option>
+          <option *ngFor="let r of regions">
+            {{ r }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="#city">City:</label>
+        <select class="form-control" id="city" formControlName="city">
+          <option *ngFor="let c of cities" [value]="c.id">
+            {{ c.city_name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="#phone">Phone</label>
+        <input type="text" id="phone" class="form-control" formControlName="phone_number" [textMask]="{mask: phone_mask}" pattern="\+ \(\d{3}\) \d{3}-\d{3}-\d{3}"  (blur)="onFormChange(otherInfoForm)" >
+
+        <div *ngIf="formErrors.phone_number" class="alert alert-danger">
+          {{ formErrors.phone_number }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="#about_me">About Me</label>
+        <textarea type="text" id="about_me" formControlName="about_me" class="form-control">
+        </textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="#birth_date">Birth Date</label>
+        <input type="date" id="birth_date" formControlName="birth_date" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="#card_number">Card</label>
+        <input type="text" id="card_number" [textMask]="{mask: card_mask}" formControlName="card_number" class="form-control" pattern="\d{4}-\d{4}-\d{4}-\d{4}"
+        (blur)="onFormChange(otherInfoForm)" >
+
+        <div *ngIf="formErrors.card_number" class="alert alert-danger">
+          {{ formErrors.card_number }}
+        </div>
+      </div>
+
+      <button class="btn btn-success" (click)="updateProfile()">Change</button>
+    </form>
+    <!-- /OTHER INFO FORM -->
+  </div>
+</div>
+</div>

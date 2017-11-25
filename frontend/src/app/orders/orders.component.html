@@ -1,0 +1,39 @@
+<div class="orders-block">
+
+
+    <div class="container">
+        <div class="row">
+          <div class="tabs-head">
+                        <ul class="nav nav-tabs">
+              <li (click)="changeOrderList('all')"><a href="#orders" data-toggle="tab">All</a></li>
+              <li *ngIf="currentUser" (click)="changeOrderList('my_public_orders')" class="active"><a href="#orders" data-toggle="tab">My orders</a></li>
+              <li *ngIf="currentUser" (click)="changeOrderList('active')"><a href="#orders" data-toggle="tab">Active</a></li>
+              <li *ngIf="currentUser" (click)="changeOrderList('draft')"><a href="#orders" data-toggle="tab">Draft</a></li>
+              <li *ngIf="currentUser" (click)="changeOrderList('archive')"><a href="#orders" data-toggle="tab">Archive</a></li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 map">
+                <app-order-map *ngIf="isDataAvaible === true"
+                               [order]="currentOrder"
+                               [orders]="currentOrders"
+                               [show]="show"
+                ></app-order-map>
+
+                <app-order-list
+                  (current_order)="setCurrentOrder($event)"
+                  (currentOrders)="updateOrders($event)"
+                  [allOrders]="allOrders"
+                  (filteredOrders)="filterOrders($event)"
+                  [orders]="currentOrders"
+                  [currentUser]="currentUser"
+                  [activeOrderType]="activeOrderType"
+                >
+                </app-order-list>
+            </div>
+        </div>
+    </div>
+</div>

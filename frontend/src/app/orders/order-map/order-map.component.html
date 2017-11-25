@@ -1,0 +1,49 @@
+<agm-map
+      [latitude]="lat"
+      [longitude]="lng"
+      [zoom]="zoom"
+      [disableDefaultUI]="false"
+      [zoomControl]="true"
+      [styles]="styles"
+      [scrollwheel]="false"
+      (mapClick)="mapClicked($event)">
+      <agm-marker-cluster
+        imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
+      <agm-marker
+          *ngFor="let m of orders; let i = index"
+          [latitude]="m.cordinate_from.lat"
+          [longitude]="m.cordinate_from.lng"
+          [iconUrl]="'assets/images/icon-map.png'"
+          (markerClick) = "click(m)"
+          [markerDraggable]="addNewOrder"
+          (dragEnd)="markerDragEnd(m, $event, markerFrom=true)"
+          data-attr="coordinateFrom"
+      >
+      </agm-marker>
+
+      <agm-marker
+          *ngIf="order && order.cordinate_to"
+          [latitude]="order.cordinate_to.lat"
+          [longitude]="order.cordinate_to.lng"
+          [iconUrl]="'assets/images/green.png'"
+          [markerDraggable]="addNewOrder"
+          (dragEnd)="markerDragEnd(m, $event, markerFrom=false)"
+         >
+
+
+        <agm-info-window [isOpen]="order && !addNewOrder">
+            <p><strong>Delivery Price: </strong>{{order.delivery_price}}</p>
+            <p><strong>Order Price: </strong>{{order.order_price}}</p>
+            <p><strong>From: </strong>{{order.from_time}}</p>
+            <p><strong>To: </strong>{{order.to_time}}</p>
+            <p><strong>Distance: </strong>{{order.distance}} m</p>
+            <p><strong>Description: </strong>{{order.description}}</p>
+        </agm-info-window>
+
+       </agm-marker>
+      </agm-marker-cluster>
+       <agm-map-directions></agm-map-directions>
+
+</agm-map>
+
+

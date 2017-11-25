@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+
+      <div class="well">
+
+        <h4>Profile`s common places </h4>
+
+        <button *ngIf="showForm!==true" class="top-button myButton" (click)="createForm()"> Create </button>
+        <button *ngIf="showForm===true" class="top-button myButton" (click)="hideForm()"> Hide <span class="glyphicon glyphicon-chevron-up"></span> </button>
+
+        <form *ngIf="showForm===true" #placeForm="ngForm">
+          <div class="form-group">
+            <label for="type" class="col-sm-2 col-form-label">Type</label>
+                  <select class="form-control" id="type"
+                          required
+                          [(ngModel)]="model.type" name="type">
+                    <option *ngFor="let typ of type" [value]="typ">{{typ}}</option>
+                  </select>
+          </div>
+
+          <div class="form-group ">
+                <label for="title" class="col-sm-2 col-form-label">Title</label>
+                <input type="text" class="form-control" id="title"
+                         placeholder="Type name for your common place"
+                         required
+                         [(ngModel)]="model.title" name="title"
+                         #title="ngModel"
+                         #spy>
+            <div [hidden]="title.valid || title.pristine"
+                 class="alert alert-danger">
+              Place title is required!
+              </div>
+          </div>
+          <div class="form-group">
+            <label class="sr-only">Coordinates</label>
+            <input class="form-control top-margin" type="text" #coordinates placeholder="Use map to customize coordinates" readonly>
+          </div>
+            <button type="submit" class="btn myButton"
+                  (click)="createPlace()"
+          [disabled]="!placeForm.form.valid">Save</button>
+        </form>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <p>Start point places <span class="glyphicon glyphicon-cutlery"></span></p>
+        </div>
+        <div class="panel-body places-body">
+          <ul *ngFor="let place of places" class="list-group scrollable custom-list">
+           <li *ngIf="place.type === 'From'" class="list-group-item justify-content-between"
+               [class.active]="place === selectedPlace"
+               (click)="onSelect(place)">
+            {{place.title}}
+            <button class="glyphicon glyphicon-pencil pull-right custom-button" (click)="goToChangeForm($event, place)"></button>
+            <button class="glyphicon glyphicon-remove pull-right custom-button" (click)="deletePlace($event, place)"></button>
+          </li>
+          </ul>
+        </div>
+      </div>
+
+
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <p> Destination places <span class="glyphicon glyphicon-flag"></span></p>
+        </div>
+        <div class="panel-body places-body">
+          <ul *ngFor="let place of places" class="list-group scrollable custom-list">
+           <li *ngIf="place.type === 'To'" class="list-group-item justify-content-between"
+               [class.active]="place === selectedPlace"
+               (click)="onSelect(place)">
+             {{place.title}}
+            <button class="glyphicon glyphicon-pencil pull-right custom-button" (click)="goToChangeForm($event, place)"></button>
+            <button class="glyphicon glyphicon-remove pull-right custom-button" (click)="deletePlace($event, place)"></button>
+          </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+
+
+    <div class="col-md-8">
+      <div class="embed-responsive embed-responsive-4by3 custom-margin">
+        <google-places
+            class="embed-responsive-item"
+            [latitude]="lat"
+            [longitude]="lng"
+            (changeCoordinates)="changeCoordinates($event)">
+        </google-places>
+      </div>
+    </div>
+
+  </div>
+</div>

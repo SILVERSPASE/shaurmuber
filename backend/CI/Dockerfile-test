@@ -1,0 +1,5 @@
+FROM python:3.5.4-jessie
+COPY ./backend .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY ./backend/CI/test.sh .
+ENTRYPOINT ["./test.sh"]

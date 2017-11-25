@@ -1,0 +1,36 @@
+<div class="orders">
+
+  <div *ngIf="activeOrderType == 'all'"
+    class="panel-group filter-panel" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+      <div class="panel-heading panel-title" role="tab" id="headingfilter">
+        <h4 role="button" data-toggle="collapse" data-parent="#accordion"
+           href="#collapsefilter" aria-expanded="false" attr.aria-controls="collapsefilter">
+            Filter Orders
+          <div type="button" class="btn-collapse"></div>
+        </h4>
+      </div>
+      <div id="collapsefilter" class="panel-collapse collapse panel-default" role="tabpanel"
+           attr.aria-labelledby="headingfilter">
+        <div class="panel-body">
+          <orders-filter
+            (filteredOrders)="filterOrders($event)"
+            [orders]="allOrders"
+          ></orders-filter>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h4 *ngIf="orders.length==0" class="panel panel-default no-orders">There are no orders yet</h4>
+
+  <app-order-detail
+    *ngFor="let order of orders"
+    (currentOrder)="setCurrentOrder($event)"
+    (currentOrders)="updateOrders($event)"
+    [orders]="orders"
+    [order]="order"
+    [currentUser]="currentUser"
+  ></app-order-detail>
+
+</div>

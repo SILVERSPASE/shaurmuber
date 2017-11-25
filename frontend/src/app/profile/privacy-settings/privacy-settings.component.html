@@ -1,0 +1,19 @@
+<div class="col-md-12">
+	<div class="row">
+		<h3>Another user can see next info about me:</h3>
+		<hr>
+		<div class="col-md-6 col-md-offset-3">
+		<form>
+			 <div class="checkbox" *ngFor="let item of template_privacy">
+          <label class="checkboxLabel" *ngIf="!item.value">
+              <input type="checkbox" [(ngModel)]="item.value" name="{{ item.key }}"> {{ item.key }}
+          </label>
+          <label class="checkboxLabel" *ngIf="item.value">
+              <input type="checkbox" checked [(ngModel)]="item.value" name="{{ item.key }}"> {{ item.key }}
+          </label>
+        </div>
+  			<button class="btn btn-success" (click)="save()">Change</button>
+  		</form>
+  		</div>
+	</div>
+</div>

@@ -1,0 +1,258 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 form">
+      <div class="main-div">
+        <p class="title">Create Order</p>
+        <form [formGroup]="createOrderForm"
+              (ngSubmit)="registerOrder()">
+          <div class="line-div">
+            <label>
+              Title
+            </label>
+            <input placeholder="Enter the title"
+                   id="title"
+                   formControlName="title"
+                   class="form-control"
+                   (blur)="onValueChange()"
+                   required
+                   [(ngModel)]="order.title"
+            >
+            <div *ngIf="formErrors.title" class="alert alert-danger big-alert">
+              {{ formErrors.title }}
+            </div>
+          </div>
+
+          <div class="row custom-div">
+            <div class="col-sm-3 col-md-auto no-padding">
+            <label>
+              From
+            </label>
+            <button
+                    class="custom-button glyphicon glyphicon-info-sign"
+                    (click)="showInfoDiv()"
+                    type="button">
+            </button>
+            </div>
+            <div class="col-sm-9 col-md-auto no-padding">
+              <input placeholder="Search for location"
+                     autocorrect="off"
+                     autocapitalize="off"
+                     spellcheck="off" type="text"
+                     class="form-control custom-form-inputs"
+                     #searchFrom [formControl]="searchFromControl">
+                <select *ngIf="userSelectFrom === true"
+                      class="form-control"
+                      title="Use common places"
+                      id="coordinate_from"
+                      required
+                      [(ngModel)]="order.cordinate_from"
+                      [ngModelOptions]="{standalone: true}"
+                      name="coordinate_from"
+                      (change)="onChangeCoordinates($event)">
+                  <option disabled hidden [value]="undefined">Use common places</option>
+                  <option *ngFor="let place of userFromPlaces" [ngValue]="place.coordinates">
+                  {{place.title}}
+                </option>
+
+
+              </select>
+            </div>
+          </div>
+
+          <div class="row custom-div">
+            <div class="col-sm-3 col-md-auto no-padding">
+              <label>
+                To
+              </label>
+              <button
+                      class="custom-button glyphicon glyphicon-info-sign"
+                      type="button"
+                      (click)="showInfoDiv()"
+                      >
+              </button>
+            </div>
+            <div class="col-sm-9 col-md-auto no-padding">
+              <input placeholder="Search for location"
+                     autocorrect="off"
+                     autocapitalize="off"
+                     spellcheck="off" type="text"
+                     class="form-control custom-form-inputs"
+                     #searchTo [formControl]="searchToControl">
+              <select *ngIf="userSelectTo===true"
+                      class="form-control"
+                      title="Use common places"
+                      id="coordinate_to"
+                      required
+                      [(ngModel)]="order.cordinate_to"
+                      [ngModelOptions]="{standalone: true}"
+                      name="coordinate_to"
+                      (change)="onChangeCoordinates($event)">
+                <option disabled hidden [value]="undefined"> Use common places </option>
+                <option *ngFor="let place of userToPlaces" [ngValue]="place.coordinates">
+                  {{place.title}}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div id='info-map' class="alert alert-info custom-info-div line-div">
+                You can use your predefined places for
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                creating new order.
+                To create your custom places, please follow this
+                <a routerLink="/profile/places">link</a>.
+          </div>
+
+          <div class="line-div time-div" style="padding-bottom: 0!important;">
+            <label class="time-label ">
+              Time
+            </label>
+            <date-picker [showClearButton]="false" mode="datetime" ngModel name="timefrom"
+                         id="timefrom"
+                         formControlName="timefrom"
+                         class="time_from form-control"
+                         (blur)="onValueChange()"
+                         required
+                         [(ngModel)]="order.from_time"
+            ></date-picker>
+            <date-picker [showClearButton]="false" mode="datetime" ngModel name="timeto"
+                         id="timeto"
+                         formControlName="timeto"
+                         class="time_to time_from form-control"
+                         (blur)="onValueChange()"
+                         required
+                         [(ngModel)]="order.to_time"
+            ></date-picker>
+              <!--<form #timefrom="ngForm"class="time_from">-->
+                <!--<date-picker [showClearButton]="false" mode="datetime" ngModel name="timefrom_value"></date-picker>-->
+                <!--<p class="alert alert-danger big-alert alert-time"  *ngIf="!timefrom.valid">Time from is invalid!</p>-->
+              <!--</form>-->
+            <!--<form #timeto="ngForm" class="time_to">-->
+                <!--<date-picker [showClearButton]="false" mode="datetime" ngModel name="timeto_value"></date-picker>-->
+                <!--<p class="alert alert-danger big-alert alert-time"  *ngIf="!timeto.valid">Time to is invalid!</p>-->
+            <!--</form>-->
+          </div>
+          <div *ngIf="formErrors.time_to" class="alert alert-danger big-alert">
+            {{ formErrors.coordinates_to }}
+          </div>
+          <div *ngIf="formErrors.time_from" class="alert alert-danger big-alert">
+            {{ formErrors.time_from }}
+          </div>
+
+          <div class="line-div price-fields">
+            <label>
+              Price
+            </label>
+            <div class="edit-btns-div">
+              <input class="small-input"
+                     placeholder="Price UAH"
+                     id="price"
+                     formControlName="price"
+                     (blur)="onValueChange()"
+                     [(ngModel)]="order.order_price"
+              >
+              <button class="turn turn-up" (click)="turnUpPrice()" type='button'><span
+                class="glyphicon glyphicon-plus"></span></button>
+              <button class="turn turn-down" (click)="turnDownPrice()" type='button'><span
+                class="glyphicon glyphicon-minus"></span></button>
+            </div>
+            <div *ngIf="formErrors.price" class="alert alert-danger big-alert">
+              {{ formErrors.price }}
+            </div>
+          </div>
+
+          <div class="line-div price-fields">
+            <label class="delivery-label">
+              Delivery
+            </label>
+            <div class="edit-btns-div">
+              <input class="small-input"
+                     placeholder="Price UAH"
+                     id="delivery"
+                     formControlName="delivery"
+                     (blur)="onValueChange()"
+                     required
+                     [(ngModel)]="order.delivery_price"
+              >
+              <button class="turn turn-up" (click)="turnUpDelivery()" type="button"><span
+                class="glyphicon glyphicon-plus"></span></button>
+              <button class="turn turn-down" (click)="turnDownDelivery()" type="button"><span
+                class="glyphicon glyphicon-minus"></span></button>
+            </div>
+            <div *ngIf="formErrors.delivery" class="alert alert-danger big-alert">
+              {{ formErrors.delivery}}
+            </div>
+          </div>
+
+          <div class="line-div" style="padding-bottom: 0!important;">
+            <label>
+              Detail
+            </label>
+            <textarea rows="4"
+                      cols="25"
+                      name="text"
+                      placeholder="Enter detail"
+                      id="detail"
+                      formControlName="detail"
+                      [(ngModel)]="order.description"
+            ></textarea>
+
+            <div class="controls-btn form-group" *ngIf="!formOrderUpdate" style="padding-bottom: 16px!important;">
+              <button (click)="addStatusPublic()"
+                      [disabled]="!coordinate_from_value || !coordinate_to_value || !createOrderForm.valid"
+                      (click)="open(content)" type="submit" class="public-btn" id="public">Public
+              </button>
+              <button (click)="addStatusDraft()"
+                      [disabled]="!coordinate_from_value || !coordinate_to_value || !createOrderForm.valid"
+                      (click)="open(content)" type="submit" class="draft-btn" id="private">Draft
+              </button>
+            </div>
+          </div>
+        </form>
+        <div class="edit-btns" *ngIf="formOrderUpdate">
+          <button (click)="editStatusPublic()" [disabled]="!createOrderForm.valid" class="public-btn">Public</button>
+          <button (click)="editStatusDraft()" [disabled]="!createOrderForm.valid" class="draft-btn">Draft</button>
+        </div>
+      </div>
+    </div>
+
+    <!--{{newOrder | json}}-->
+
+    <div class="map col-lg-push-1 col-lg-9 col-md-push-1 col-md-8">
+
+      <div (click)="createOrder()"></div>
+
+      <app-order-map *ngIf="!formOrderUpdate"
+        [orders]="newAddedOrder"
+        [order]="newOrder"
+        [addNewOrder]="true"
+        (getFromChild)="getFromChild($event)"
+      ></app-order-map>
+
+
+      <app-order-map *ngIf="formOrderUpdate"
+        [orders]="newAddedOrder"
+        [order]="order"
+        [addNewOrder]="true"
+        (getFromChild)="getFromChild($event)"
+      ></app-order-map>
+
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <h2 class="modal-title">Thank's a lot for creating order</h2>
+  <img class="center-block" src="./src/assets/images/happy-2.png">
+  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+    <!--<span aria-hidden="true">&times;</span>-->
+  </button>
+
+  <p class="modal_p">Please choose the next step<img src="./src/assets/images/share.png"></p>
+  <div class="modal_btns">
+    <button (click)="d('Cross click')" routerLink="/"><a routerLink="/">Home Page</a></button>
+    <button (click)="d('Cross click')" routerLink="/orders"><a routerLink="/orders">Orders</a></button>
+    <button (click)="d('Cross click')" routerLink="/create-order"><a routerLink="/create-order">Create Order</a></button>
+  </div>
+</ng-template>
+

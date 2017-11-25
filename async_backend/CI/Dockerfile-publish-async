@@ -1,0 +1,9 @@
+FROM python:3.5.4-jessie
+
+COPY ./async_backend .
+COPY ./backend/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY ./async_backend/CI/deploy_async.sh .
+EXPOSE 5432
+ENTRYPOINT ["./deploy_async.sh"]
+

@@ -1,0 +1,50 @@
+<div class="orders-filter" *ngIf="filterIsReady">
+  <div *ngFor="let key of filters | ObjNgFor" class="filter-item">
+  <h4>
+    {{filters[key].title}}:
+      <span *ngIf="key == 'order_price' || key == 'delivery_price'">
+        {{filters[key].range[0]}} UAH - {{filters[key].range[1]}} UAH
+      </span>
+      <span *ngIf="key == 'distance'">
+        {{filters[key].range[0]}} m - {{filters[key].range[1]}} m
+      </span>
+      <span *ngIf="key == 'customers_rate'">
+        {{filters[key].range[0]}} Points - {{filters[key].range[1]}} Points
+      </span>
+  </h4>
+
+  <nouislider
+    *ngIf="filters[key].type=='range'"
+    [connect]="true"
+    [min]="filters[key].min"
+    [max]="filters[key].max"
+    [step]="1"
+    [(ngModel)]="filters[key].range"
+  ></nouislider>
+
+    <div *ngIf="filters[key].type =='datetime'">
+        <date-picker
+    [showClearButton]="false" mode="datetime" ngModel name="timefrom"
+               class="time_from form-control"
+               (blur)="onValueChange()"
+               [(ngModel)]="filters.datetime.dateTimeFrom"
+  ></date-picker>
+
+    <date-picker
+    [showClearButton]="false" mode="datetime" ngModel name="timefrom"
+               class="time_from form-control"
+               (blur)="onValueChange()"
+               [(ngModel)]="filters.datetime.dateTimeTo"
+  ></date-picker>
+
+
+
+    </div>
+
+
+  </div>
+  <button (click)="filterOrders(filters)" class="btn btn-primary">Filter It!</button>
+
+
+
+</div>

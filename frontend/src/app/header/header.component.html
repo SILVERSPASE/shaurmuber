@@ -1,0 +1,71 @@
+<nav class="navbar navbar-default">
+  <div class="container">
+
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" routerLink="/">ShaurmUber</a>
+    </div>
+
+    <!-- Hamburger menu items -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+      <ul class="nav navbar-nav navbar-right">
+        <!-- Show to everyone -->
+        <li>
+          <a href="#" (click)="open(pleaseRegister)" *ngIf="!currentUser"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create order</a>
+          <a routerLink="/create-order" *ngIf="currentUser"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create order</a>
+        </li>
+
+        <!-- Unauthorized -->
+        <li><a *ngIf="!isAuthenticated" routerLink="/login">Log In</a></li>
+        <li><a *ngIf="!isAuthenticated" routerLink="/registration">Sign Up</a></li>
+
+        <!-- Authorized -->
+        <li *ngIf="isAuthenticated" class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            <span class="glyphicon glyphicon-bell" aria-hidden="true"></span>&nbsp;&nbsp;Notifications <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            
+            <li role="presentation" *ngFor="let i of notifications">
+              <a (click)="disable_not(notifications.indexOf(i))">{{ i.text }}</a>
+            </li>
+            
+          </ul>
+        </li>
+
+        <li *ngIf="isAuthenticated" class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;Profile <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+              <li><a routerLink="/u/{{ currentUserUUID.uuid }}">My Profile</a></li>
+              <li><a routerLink="/profile">Edit My Profile</a></li>
+            <li><a routerLink="/orders">Orders</a></li>
+            <!-- <li><a href="#">Comments</a></li> -->
+            <!-- <li><a href="#">Messages</a></li> -->
+            <!-- <li class="divider"></li> -->
+            <!-- <li><a href="#">Options</a></li> -->
+            <li class="divider"></li>
+            <li><a href="#" (click)="logout()"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Log out</a></li>
+          </ul>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+<ng-template #pleaseRegister let-c="close" let-d="dismiss">
+  <h2 class="modal-title center-block title" >Please login or register</h2>
+  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+    <!--<span aria-hidden="true">&times;</span>-->
+  </button>
+  <div class="modal_btns">
+    <a routerLink="/registration" (click)="d('Cross click')">Registration</a>
+    <a routerLink="/login" (click)="d('Cross click')">Log In</a>
+  </div>
+</ng-template>

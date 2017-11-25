@@ -1,0 +1,50 @@
+<div class="container main">
+  <div class='col-md-3 menu'>
+    <div class="nameImage">
+      <div class="row">
+        {{user.first_name}} {{user.last_name}}
+        <img src="{{imageToDisplay}}" alt="" class="img-circle img-responsive center-block" width="200">
+        <br>
+        <button class="btn btn-success" (click)="open(photoCropper)" >Change</button>
+      </div>
+    </div>
+    <hr>
+    <ul class="nav nav-stacked">
+      <li role="presentation"><a routerLink="/profile">Profile</a></li>
+      <li role="presentation"><a routerLink="/profile/privacy_policy">Privacy settings</a></li>
+      <!-- <li role="presentation"><a routerLink="/profile/comments">Comments</a></li> -->
+      <li role="presentation"><a routerLink="/profile/notifications">Notifications</a></li>
+    </ul>
+    <hr>
+    <div class="deleteProfile">
+      <a (click)="deleteProfile()" href="#" >Delete profile</a>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+
+<ng-template  #photoCropper let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title center-block title" >Upload Image</h4>
+    <button id="btnCloseCropper" type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <app-photo-cropper></app-photo-cropper>
+</ng-template>
+
+<div id="resultError" class="result-modal alert alert-danger alert-dismissible text-center" role="alert">
+<!--   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+  <strong>Error!</strong> Something went wrong...
+</div>
+
+<div id="resultSuccess" class="result-modal alert alert-success alert-dismissible text-center" role="alert">
+<!--   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+  <strong>Success!</strong> Changes saved!
+</div>
+
+
+

@@ -1,0 +1,277 @@
+<div class="panel panel-default">
+  <div class="panel-heading" role="tab" id="heading{{ order.uuid }}">
+    <h4 class="panel-title">
+      <a (click)="changeCurrentOrder(order);" role="button" data-toggle="collapse" data-parent="#accordion"
+         href="#collapse{{ order.uuid }}" aria-expanded="false" attr.aria-controls="collapse{{ order.uuid }}">
+        {{ order.title }}
+        <div type="button" class="btn-collapse"></div>
+      </a>
+    </h4>
+  </div>
+  <div id="collapse{{ order.uuid }}" class="panel-collapse collapse panel-default" role="tabpanel"
+       attr.aria-labelledby="heading{{ order.uuid }}">
+    <div class="panel-body">
+      <div class=" notify">
+        <div *ngIf="order.status == 'waiting_for_payment' && order.customer.uuid == currentUser.uuid">
+          Please, pay for this order to activate courier!
+        </div>
+        <div *ngIf="order.status == 'waiting_for_payment' && order.curier.uuid == currentUser.uuid" class="field">
+          You have chosen as a curier. Just wait for customers payment and start delivery!
+        </div>
+        <div *ngIf="order.status == 'delivered' && order.customer.uuid == currentUser.uuid" class="field">
+          Please, accept receiving your order!
+        </div>
+        <div *ngIf="order.status == 'delivered' && order.curier.uuid == currentUser.uuid" class="field">
+          Wait for customer accept!
+        </div>
+      </div>
+      <div *ngIf="currentUser && currentUser.uuid == order.customer.uuid && order.status == 'public'"
+           class="field candidates-list">
+        <div class="field_head">
+          <span>Candidates:</span>
+        </div>
+        <div *ngIf="candidatesList.length != 0" class="field_content">
+          <div *ngFor="let cand of candidatesList">
+            <div class="col-md-6 candidates">
+              {{ cand.candidate.first_name }} {{ cand.candidate.last_name }}
+            </div>
+            <div class="col-md-6">
+              <div (click)="open(doYouWannaContinue, order.uuid, cand.candidate.uuid)"
+                   class="btn btn-success btn-xs">
+                +
+              </div>
+              <!--<div (click)="chooseCandidate(cand.candidate.uuid, order.uuid)" class="btn btn-success btn-xs">+</div>-->
+            </div>
+          </div>
+        </div>
+        <div *ngIf="candidatesList.length == 0" class="field_content">There are no candidates yet.</div>
+      </div>
+      <div class="field">
+        <div class="field_head">
+          <span>Customer:</span>
+        </div>
+        <div class="field_content">
+          {{order.customer.first_name}} {{order.customer.last_name}}
+        </div>
+      </div>
+      <div *ngIf="order.curier" class="field">
+        <div class="field_head curier">
+          <span>Curier:</span>
+        </div>
+        <div class="field_content">
+          {{order.curier.first_name}} {{order.curier.last_name}}
+        </div>
+      </div>
+      <div class="field">
+        <div class="field_head">
+          <span>From:</span>
+        </div>
+        <div class="field_content">
+          {{order.to_time}}
+        </div>
+      </div>
+      <div class="field">
+        <div class="field_head">
+          <span>To:</span>
+        </div>
+        <div class="field_content">
+          {{order.from_time}}
+        </div>
+      </div>
+      <div class="field">
+        <div class="field_head">
+          <span>Price:</span>
+        </div>
+        <div class="field_content">
+          {{order.order_price}} UAH
+        </div>
+      </div>
+      <div class="field">
+        <div class="field_head">
+          <span>Delivery:</span>
+        </div>
+        <div class="field_content">
+          {{order.delivery_price}} UAH
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field_head">
+          <span>Distance:</span>
+        </div>
+        <div class="field_content">
+          {{order.distance}} m
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field_head">
+          <span>Additional info:</span>
+        </div>
+        <div class="field_content">
+          {{order.description}}
+        </div>
+
+        <div class="panel-footer">
+          <a *ngIf="!currentUser || currentUser.uuid != order.customer.uuid && order.status=='public'"
+             (click)="open(youAreInCandidatList, order.uuid) "
+             (click)="takeOrder(order.uuid)"
+             type="button" class="btn btn-success btn-sm"
+          >Take it</a>
+
+          <div *ngIf="currentUser">
+            <!--show buttons only for orders owners and with status public-->
+            <a *ngIf="currentUser.uuid == order.customer.uuid && order.status == 'public'"
+               (click)="updateOrder(order.uuid)"
+               type="button" class="btn btn-danger btn-sm"
+            >Edit</a>
+
+            <!--show buttons for owners and with status public and active-->
+            <a *ngIf="(currentUser.uuid == order.customer.uuid || (order.curier && currentUser.uuid == order.curier.uuid))
+           && (order.status != 'done'
+               &&  order.status != 'canceled_by_courier'
+               &&  order.status != 'canceled_by_customer')"
+
+               (click)="Accept(doYouWannaDelete)" type="button" class="btn btn-danger btn-sm"
+            >Cancel</a>
+
+            <!--<a *ngIf="order.status == 'waiting_for_payment'"-->
+            <!--(click)="open(YouCantCancelIt)" type="button" class="btn btn-danger btn-sm"-->
+            <!--&gt;Cancel</a>-->
+
+            <a *ngIf="currentUser.uuid == order.customer.uuid && order.status == 'draft'"
+               (click)="open(doYouWannaChangeDraft)"
+               type="button" class="btn btn-success btn-sm"
+            >Public</a>
+
+            <a *ngIf="  order.status == 'active' || order.status == 'delivered'"
+               [routerLink]="['/dialog', order.id ]"
+               type="button" class="btn btn-success btn-sm"
+            >Message</a>
+
+            <!--confirm delivery from courier-->
+            <a
+              *ngIf="(order.status == 'active' || order.status == '!delivered') && currentUser.uuid == order.curier.uuid"
+              (click)="Accept(doYouWannaConfirmCurier)"
+              type="button" class="btn btn-success btn-sm"
+            >Confirm</a>
+
+            <!--accept delivery from customer-->
+            <a
+              *ngIf="(order.status == 'active' || order.status == 'delivered') && currentUser.uuid == order.customer.uuid"
+              (click)="Accept(doYouWannaCustomerAccept)"
+              type="button" class="btn btn-success btn-sm">
+              Accept
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #doYouWannaContinue let-c="close" let-d="dismiss">
+  <h2 class="modal-title">Are you sure to join this person?</h2>
+  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+    <!--<span aria-hidden="true">&times;</span>-->
+  </button>
+  <div class="modal_btns">
+    <a (click)="(chooseCandidate(order.curier, order.uuid))" (click)="d('Cross click')">Yes</a>
+    <a routerLink="/orders" (click)="d('Cross click')">No</a>
+  </div>
+</ng-template>
+
+<ng-template #doYouWannaDelete let-c="close" let-d="dismiss">
+  <h2 class="modal-title">Are you sure to delete this order?</h2>
+  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+    <!--<span aria-hidden="true">&times;</span>-->
+  </button>
+  <div class="modal_btns">
+    <a (click)="cancelOrder(order)" (click)="d('Cross click')">Yes</a>
+    <a routerLink="/orders" (click)="d('Cross click')">No</a>
+  </div>
+</ng-template>
+
+<ng-template #doYouWannaConfirmCurier let-c="close" let-d="dismiss">
+  <h2 class="modal-title">Are you sure to confirm delivery to customer?</h2>
+  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+    <!--<span aria-hidden="true">&times;</span>-->
+  </button>
+  <div class="modal_btns">
+    <a (click)="courierConfirm(order, waitForCustomerAccept)" (click)="d('Cross click')">Yes</a>
+    <a routerLink="/orders" (click)="d('Cross click')">No</a>
+  </div>
+</ng-template>
+
+<ng-template #waitForCustomerAccept let-c="close" let-d="dismiss">
+  <h2 class="modal-title">Now wait for customer's accept!</h2>
+  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+    <!--<span aria-hidden="true">&times;</span>-->
+  </button>
+  <div class="modal_btns">
+    <a routerLink="/orders" (click)="d('Cross click')">Ok</a>
+  </div>
+</ng-template>
+
+
+<ng-template #doYouWannaCustomerAccept let-c="close" let-d="dismiss">
+  <h2 class="modal-title">Are you sure to accept receiving your order? Money will be send to courier!</h2>
+  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+    <!--<span aria-hidden="true">&times;</span>-->
+  </button>
+  <div class="modal_btns">
+    <a (click)="acceptCustomer(order, accomplishOrder)" (dblclick)="open(accomplishOrder)" (click)="d('Cross click')">Yes</a>
+    <a routerLink="/orders" (click)="d('Cross click')">No</a>
+  </div>
+</ng-template>
+
+<ng-template #doYouWannaChangeDraft let-c="close" let-d="dismiss">
+  <h2 class="modal-title">Are you sure to public this order?</h2>
+  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+    <!--<span aria-hidden="true">&times;</span>-->
+  </button>
+  <div class="modal_btns">
+    <a (click)="fromDraftToPublic(order.uuid)" (click)="d('Cross click')">Yes</a>
+    <a routerLink="/orders" (click)="d('Cross click')">No</a>
+  </div>
+</ng-template>
+
+<ng-template #youAreInCandidatList let-c="close" let-d="dismiss">
+  <img class="center-block img-modal" src="./src/assets/images/surprised.png" *ngIf="!currentUser">
+  <h2 class="modal-title" *ngIf="currentUser">You are in candidate list. Now wait for customer's response</h2>
+  <h2 class="modal-title" *ngIf="!currentUser">Please login or register</h2>
+  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+    <!--<span aria-hidden="true">&times;</span>-->
+  </button>
+  <div class="modal_btns">
+    <a routerLink="/orders" (click)="d('Cross click')" *ngIf="currentUser">Close</a>
+    <a routerLink="/registration" *ngIf="!currentUser" (click)="d('Cross click')">Registration</a>
+    <a routerLink="/login" *ngIf="!currentUser" (click)="d('Cross click')">Log In</a>
+  </div>
+</ng-template>
+
+<ng-template #accomplishOrder let-c="close" let-d="dismiss">
+  <h2 class="modal-title">You can appreciate the customer</h2>
+  <div class="form-group stars">
+    <ngb-rating [formControl]="ctrl">
+      <ng-template let-fill="fill">
+        <span class="star" [class.filled]="fill === 100">&#9733;</span>
+      </ng-template>
+    </ngb-rating>
+    <div class="form-text small">
+      <div *ngIf="ctrl.valid" class="text-success">Thanks!</div>
+      <div *ngIf="ctrl.invalid" class="text-danger">Please rate us</div>
+    </div>
+  </div>
+  <textarea placeholder="Add Comment" class="comment center-block" [(ngModel)]="commentValue"></textarea>
+  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+    <!--<span aria-hidden="true">&times;</span>-->
+  </button>
+  <div class="modal_btns">
+    <a routerLink="/orders" (click)="d('Cross click')" *ngIf="currentUser"
+       (click)="sendCommentAndRating(order.customer.uuid, order.curier.uuid)">Ok</a>
+    <a routerLink="/registration" *ngIf="!currentUser" (click)="d('Cross click')">Registration</a>
+    <a routerLink="/login" *ngIf="!currentUser" (click)="d('Cross click')">Log In</a>
+  </div>
+</ng-template>

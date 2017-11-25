@@ -1,0 +1,37 @@
+<nav class="navbar navbar-default myfooter">
+  <div class="container">
+
+    <!-- Logo -->
+    <div class="navbar-header">
+      <a class="navbar-brand" routerLink="">ShaurmUber</a>
+    </div>
+
+    <!-- About Us -->
+    <ul class="nav navbar-nav">
+      <li><a [routerLink]="['about']" fragment="about">About Us</a></li>
+      <li><a [routerLink]="['about']" fragment="contacts">Contacts</a></li>
+      <li><a [routerLink]="['about']" fragment="privacy">Privacy Policy</a></li>
+      <li><a [routerLink]="['about']" fragment="faq">FAQ</a></li>
+    </ul>
+
+    <!-- Social -->
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=" class="icons-sm fb-ic" target="_blank">
+          <i class="fa fa-facebook"></i></a>
+      </li>
+      <li>
+        <a href="https://twitter.com/home?status=" class="icons-sm tw-ic" target="_blank">
+          <i class="fa fa-twitter"></i></a>
+      </li>
+      <li>
+        <a href="https://plus.google.com/share?url=" class="icons-sm gplus-ic" target="_blank">
+          <i class="fa fa-google-plus"></i></a>
+      </li>
+      <li>
+        <p class="navbar-text navbar-right copyrights">&copy; 2017 ShaurmUber</p>
+      </li>
+    </ul>
+
+  </div>
+</nav>
