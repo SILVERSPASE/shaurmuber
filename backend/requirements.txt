@@ -33,7 +33,7 @@ hiredis==0.2.0
 hyperlink==17.3.1
 idna==2.6
 incremental==17.5.0
-Jinja2==2.9.6
+Jinja2==2.11.3
 kombu==4.1.0
 liqpay-python3==1.1.1
 Markdown==2.6.9
